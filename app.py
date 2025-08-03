@@ -9,8 +9,10 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def home():
     """This function handles requests to the home page."""
+
+    calculatedResult = 4*4
     # Return a JSON response
-    return jsonify({"message": "Hello, World! Brad"})
+    return jsonify({"message": "Hello, World! Brad Property", "calculatedResult": calculatedResult})
 
 # Run the app if the script is executed directly
 if __name__ == '__main__':
@@ -30,7 +32,7 @@ if __name__ == '__main__':
 
 
 # New endpoint that accepts POST requests with a user name
-@app.route('/greet', methods=['POST'])
+@app.route('/report', methods=['POST'])
 def greet_user():
     """Handle POST requests containing a user's name in the payload."""
     # Get JSON data from request
@@ -40,7 +42,13 @@ def greet_user():
     if data and 'name' in data:
         name = data['name']
         address = data['address']
-        return jsonify({"message": greet_user_function(name, address)})
+        purchasePrice = data['purchase_price']
+        return jsonify(
+            {
+                "message": greet_user_function(name, address),
+                "value": purchasePrice
+            }
+        )
     else:
         return jsonify({"error": "Missing name parameter in request"}), 400
 
