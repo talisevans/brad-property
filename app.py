@@ -46,7 +46,8 @@ def greet_user():
         return jsonify(
             {
                 "message": greet_user_function(name, address),
-                "value": purchasePrice
+                "value": purchasePrice,
+                "ROI": 28.5
             }
         )
     else:
